@@ -4,8 +4,6 @@ const dotenv = require('dotenv');
 const routes = require('./router/endpoint');
 const cors = require('cors');
 
-const app = express();
-
 dotenv.config();
 
 const corsOptions = {
@@ -15,9 +13,11 @@ const corsOptions = {
     optionsSuccessStatus: 204,
 };
 
+const app = express();
+
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(routes);
-app.use(cors(corsOptions));
 
 app.get('/', (req, res) => {
     res.send('server berjalan'); 
